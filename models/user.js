@@ -42,12 +42,18 @@ const registerSchema = Joi.object({
   email: Joi.string().required().pattern(emailRegexp).messages({
     "string.pattern.base": "Email is not valid",
   }),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().required(),
   subscription: Joi.string().valid(...subscriptionType),
+});
+
+const loginSchema = Joi.object({
+  email: Joi.string().required().pattern(emailRegexp),
+  password: Joi.string().required(),
 });
 
 const schemas = {
   registerSchema,
+  loginSchema,
 };
 
 const User = model("user", userSchema);
